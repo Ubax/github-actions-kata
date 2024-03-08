@@ -1,9 +1,7 @@
 name: task-2-workflow
 run-name: Task 2 workflow
-on: 
-  pull_request:
-    branches:
-      - main
+on:
+  pull_request
 defaults:
   run:
     working-directory: desktop-app
@@ -13,7 +11,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          cache: "npm"
+          cache-dependency-path: desktop-app
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Run unit tests
         run: npm test
