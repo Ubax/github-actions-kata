@@ -1,0 +1,16 @@
+name: task-1-workflow
+run-name: Task 1 workflow
+on: [push, pull_request]
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lists PRs branches
+        run: echo "PR base ${{ github.base_ref }} head ${{ github.head_ref }}"
+        if: ${{ github.event_name == 'pull_request' }}
+      - name: Lists push branch
+        run: echo 'Push branch ${{ github.ref }}, commit ref ${{ github.sha }}'
+        if: ${{ github.event_name == 'push' }}
+      - name: Lists files in repo
+        run: ls -alR
