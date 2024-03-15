@@ -17,7 +17,7 @@
     "e2e": "npm run build && npx playwright test",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "npm run build && electron-forge make"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
