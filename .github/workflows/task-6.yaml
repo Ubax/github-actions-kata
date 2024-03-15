@@ -63,11 +63,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: List files
-        run: ls -Rl
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
           body: This is release
           files: |
-            LICENSE
+            LICENCE
