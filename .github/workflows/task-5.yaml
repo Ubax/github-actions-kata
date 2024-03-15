@@ -1,0 +1,27 @@
+name: task-5-workflow
+run-name: Task 5 workflow
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "website/**"
+
+defaults:
+  run:
+    working-directory: website
+jobs:
+  deploy-website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        id: deploy
+        with:
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          channelId: live
+          projectId: ${{ vars.FIREBASE_PROJECT_ID }}
+          entryPoint: website
+      # Cannot use details_url here because it is production deployment
+      - run: echo "Website deployed to https://${{ vars.FIREBASE_PROJECT_ID }}.web.app"
