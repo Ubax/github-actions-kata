@@ -8,11 +8,11 @@ on:
 permissions:
   contents: write
 
-defaults:
-  run:
-    working-directory: desktop-app
 jobs:
   deploy-website:
+    defaults:
+      run:
+        working-directory: desktop-app
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest, macos-14]
@@ -44,8 +44,6 @@ jobs:
   create-release:
     needs: deploy-website
     runs-on: ubuntu-latest
-    run:
-      working-directory: .
     steps:
       - name: Download builds
         uses: actions/download-artifact@v4
