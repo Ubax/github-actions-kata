@@ -8,64 +8,53 @@ on:
 permissions:
   contents: write
 
-# defaults:
-#   run:
-#     working-directory: desktop-app
+defaults:
+  run:
+    working-directory: desktop-app
 jobs:
-  # deploy-website:
-  #   strategy:
-  #       matrix:
-  #         os: [ubuntu-latest, windows-latest, macos-latest, macos-14]
-  #   runs-on: ${{ matrix.os }}
-  #   outputs:
-  #     build-artifact: ${{ steps.archive-build.outputs.artifact }}
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-  #     - name: Use Node.js LTS
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: "lts/*"
-  #         cache: "npm"
-  #         cache-dependency-path: desktop-app
-  #     - name: Install dependencies
-  #       run: npm install
-  #     - name: Build the app
-  #       run: npm run make
-  #     - name: List files
-  #       run: ls
-  #     - name: archive build
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: ${{ matrix.os }}-build
-  #         path: desktop-app/out
-  #         retention-days: 1
+  deploy-website:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest, macos-14]
+    runs-on: ${{ matrix.os }}
+    outputs:
+      build-artifact: ${{ steps.archive-build.outputs.artifact }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+          cache: "npm"
+          cache-dependency-path: desktop-app
+      - name: Install dependencies
+        run: npm install
+      - name: Build the app
+        run: npm run make
+      - name: List files
+        run: ls
+      - name: archive build
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os == 'macos-14' && 'macos-arm' || matrix.os }}-release
+          path: desktop-app/out/calculator-*
+          retention-days: 1
 
-  # create-release:
-  #   needs: deploy-website
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-  #     - name: Download builds
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         path: release
-  #     - name: List files
-  #       run: ls -Rl
-  #     - name: Create release
-  #       uses: softprops/action-gh-release@v2
-  #       with:
-  #         files:
-
-  create-fast-release:
+  create-release:
+    needs: deploy-website
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Download builds
+        uses: actions/download-artifact@v4
+        with:
+          path: release
+      - name: List files
+        run: ls -Rl
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          body: This is release
-          files: |
-            LICENCE
+          files:
+            - release/*
