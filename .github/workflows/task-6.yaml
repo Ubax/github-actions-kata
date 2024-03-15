@@ -8,9 +8,9 @@ on:
 permissions:
   contents: write
 
-defaults:
-  run:
-    working-directory: desktop-app
+# defaults:
+#   run:
+#     working-directory: desktop-app
 jobs:
   # deploy-website:
   #   strategy:
