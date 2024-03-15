@@ -56,5 +56,8 @@ jobs:
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          files:
-            - release/*
+          files: |
+            release/macos-arm-release
+            release/macos-latest-release
+            release/ubuntu-latest-release
+            release/windows-latest-release
