@@ -1,0 +1,41 @@
+name: matrix
+run-name: Matrix workflow
+on:
+  push
+
+jobs:
+  deploy-website:
+    strategy:
+        matrix:
+          os: [ubuntu-latest, windows-latest, macos-latest, macos-14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - run: mkdir out
+      - run: echo "Hello, world! ${{ matrix.os }}" > out/hello.txt
+      - name: archive build
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}-build
+          path: out
+          retention-days: 1
+
+  download-artifacts:
+    needs: deploy-website
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Download builds
+        uses: actions/download-artifact@v2
+      - name: List files
+        run: ls -Rl
+      # - name: Delete artifacts
+      #   uses: actions/github-script@v7
+      #   script: |
+      #     github.rest.actions.deleteArtifact({
+      #       issue_number: context.issue.number,
+      #       owner: context.repo.owner,
+      #       repo: context.repo.repo,
+      #     })
