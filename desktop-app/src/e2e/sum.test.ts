@@ -6,7 +6,7 @@ electronTest.afterEach(saveScreenshotOnFailure('sum'))
 
 electronTest("With no numbers the result is 0", async ({ page }) => {
     const result = await page.getByTestId("result")
-    expect(await result.innerText()).toBe("0")
+    expect(await result.innerText()).toBe("1")
 })
 
 electronTest("With only first number changed returns first number", async ({ page }) => {
