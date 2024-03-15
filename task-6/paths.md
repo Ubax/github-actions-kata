@@ -4,4 +4,4 @@
 | -------- | ---- |
 | Windows  | ...  |
 | Linux    | ...  |
-| MacOS    | ...  |
+| MacOS    | desktop-app/out/calculator-darwin-arm64  |

@@ -1,4 +1,4 @@
-# Task 5
+# Task 6
 
 Your team realized that they spend a lot of time building apps for releases and in many cases there is something to fix on one or the other platform. Now they would like to build the application as part of the pipeline. The application is a multi-platform application, that should run on Linux, Windows and Mac.
 
@@ -15,6 +15,7 @@ Your team realized that they spend a lot of time building apps for releases and 
 
 - `npm run make`
 - [artifacts](https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts#uploading-build-and-test-artifacts)
+- [matrixes](https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs)
 - [Paths to executables](./paths.md) - Try to first find the paths yourself. Only if you don't know how to do it check those
 </details>
 
