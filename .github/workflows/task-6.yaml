@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  deploy-website:
+  build-application:
     defaults:
       run:
         working-directory: desktop-app
@@ -42,7 +42,7 @@ jobs:
           retention-days: 1
 
   create-release:
-    needs: deploy-website
+    needs: build-application
     runs-on: ubuntu-latest
     steps:
       - name: Download builds
@@ -51,11 +51,19 @@ jobs:
           path: release
       - name: List files
         run: ls -Rl
+      - name: Zip releases
+        run: |
+          zip -r macos-apple-silicon.zip release/macos-arm-release
+          zip -r macos-intel.zip release/macos-latest-release
+          zip -r linux.zip release/ubuntu-latest-release
+          zip -r windows.zip release/windows-latest-release
+      - name: List files
+        run: ls -Rl
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            release/macos-arm-release
-            release/macos-latest-release
-            release/ubuntu-latest-release
-            release/windows-latest-release
+            macos-apple-silicon.zip
+            macos-intel.zip
+            linux.zip
+            windows.zip
