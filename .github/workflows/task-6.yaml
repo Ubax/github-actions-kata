@@ -56,7 +56,6 @@ jobs:
   #         files:
 
   create-fast-release:
-    needs: deploy-website
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
