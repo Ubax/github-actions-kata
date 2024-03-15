@@ -10,7 +10,7 @@ jobs:
   deploy-website:
     strategy:
         matrix:
-          os: [ubuntu-latest, windows-latest, macos-latest]
+          os: [ubuntu-latest, windows-latest, macos-latest, macos-14]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
@@ -32,3 +32,4 @@ jobs:
         with:
           name: ${{ matrix.os }}-build
           path: desktop-app/out
+          retention-days: 1
