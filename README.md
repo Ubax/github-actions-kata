@@ -34,6 +34,39 @@ There are several branches included in this repository. The `main` branch contai
 4. Create branch `task-1` and start working on the task
 5. After you finish the task, create a PR to the `main` branch
 
+## What will you build?
+
+```mermaid
+flowchart LR
+    User
+
+    subgraph DA [Desktop app]
+        direction LR
+        C[Commit to\ndesktop app] --> U[Unit tests]
+        U --> B[Build]
+        B --> E[E2E]
+    end
+
+    subgraph RR[Release]
+        direction LR
+        T[Tag] --> PBW[Production build windows]
+        T[Tag] --> PBM[Production build mac]
+        T[Tag] --> PBL[Production build linux]
+        PBW --> R[Release on github]
+        PBM --> R[Release on github]
+        PBL --> R[Release on github]
+    end
+
+    subgraph W [Website]
+        direction LR
+        Wr[Commit to\nwebsite] --> DW[Deploy]
+    end
+
+    User --> DA
+    User --> RR
+    User --> W
+```
+
 ## GitHub Actions Pricing
 
 GitHub Actions is free for public repositories. For private repositories, up to 2000 **Linux** minutes per month are available at no charge. For detailed pricing information, visit the [GitHub Actions billing page](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions). Working on a public fork of this repository is recommended.
