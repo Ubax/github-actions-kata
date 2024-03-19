@@ -1,14 +1,27 @@
-name: task 1 workflow
+name: task 2 workflow
 on: 
     push: 
     # event - https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
 jobs:
   example-job:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./desktop-app
+    
          # system - https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
     steps:
-      - run: echo "GITHUB REF ${GITHUB_REF}"
-      - run: echo "GITHUB Branch ${GITHUB_REF_NAME}"
-      - run: echo "COMMIT REF ${GITHUB_SHA}"
       - uses: actions/checkout@v4
-      - run: ls -R
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+          cache: 'npm'
+          cache-dependency-path: desktop-app/package-lock.json
+
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+
+      
+      
