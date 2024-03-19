@@ -1,0 +1,11 @@
+name: example-workflow
+on: 
+    push: 
+    pull_request: 
+    # event - https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+         # system - https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+    steps:
+      - run: echo "Hello, World!"
