@@ -5,8 +5,8 @@ on:
 jobs:
   example-job:
     runs-on: ubuntu-latest
-    defaults:
-      run:
+    # defaults:
+    #   run:
         # working-directory: ./desktop-app
     
          # system - https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
