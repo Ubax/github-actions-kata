@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./desktop-app
+        # working-directory: ./desktop-app
     
          # system - https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
     steps:
@@ -17,10 +17,13 @@ jobs:
         with:
           node-version: 'latest'
           cache: 'npm'
-          # cache-dependency-path: package-lock.json
+          cache-dependency-path: desktop-app/package-lock.json
 
       - run: npm ci
+        working-directory: ./desktop-app
       - run: npm run build --if-present
+        working-directory: ./desktop-app
       - run: npm test
+        working-directory: ./desktop-app
       
       
