@@ -8,5 +8,5 @@ electronTest("Window has correct title", async ({
   page
 }) => {
   const title = await page.title();
-  expect(title).toBe("asdfasdfsaReact + TS");
+  expect(title).toBe("React + TS");
 })

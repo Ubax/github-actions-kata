@@ -23,7 +23,7 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build --if-present
+      - run: npm run build
       - run: npm test
       - run: xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- npm run e2e
       - uses: actions/upload-artifact@v4
