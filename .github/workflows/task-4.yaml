@@ -28,11 +28,12 @@ jobs:
         id: e2e
         run: xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- npm run e2e
       - name: Archive test results
+        id: upload-screenshots
         if: ${{ failure() && steps.e2e.conclusion == 'failure' }}
         uses: actions/upload-artifact@v4
         with:
           name: e2e-test-results
           path: desktop-app/test-results
           retention-days: 7
-      - run:  echo 'Screenshots available "at ${{ steps.artifact-upload-step.outputs.artifact-url }}'
+      - run:  echo 'Screenshots available "at ${{ steps.upload-screenshots.outputs.artifact-url }}'
         if: ${{ failure() && steps.e2e.conclusion == 'failure' }}
