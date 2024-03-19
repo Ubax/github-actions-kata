@@ -1,0 +1,14 @@
+name: example-workflow
+on: 
+    push: 
+    # event - https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+         # system - https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
+    steps:
+      - run: echo "GITHUB REF ${GITHUB_REF}"
+      - run: echo "GITHUB Branch ${GITHUB_REF_NAME}"
+      - run: echo "COMMIT REF ${GITHUB_SHA}"
+      - uses: actions/checkout@v4
+      - run: ls -R
