@@ -1,4 +1,4 @@
-name: example-workflow
+name: task 1 workflow
 on: 
     push: 
     # event - https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
