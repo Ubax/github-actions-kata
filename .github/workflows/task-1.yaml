@@ -1,0 +1,12 @@
+name: task-1-workflow
+run-name: Task 1 workflow
+on: [push]
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lists push branch
+        run: echo 'Push branch ${{ github.ref }}, commit ref ${{ github.sha }}'
+      - name: Lists files in repo
+        run: ls -alR
