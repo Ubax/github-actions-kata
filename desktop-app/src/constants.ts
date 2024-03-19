@@ -5,4 +5,4 @@ export const AMAZONS = [
   { name: "Włochy", url: "https://www.amazon.it" },
   { name: "Francja", url: "https://www.amazon.fr" },
   { name: "Hiszpania", url: "https://www.amazon.es" },
-]; 
+];
