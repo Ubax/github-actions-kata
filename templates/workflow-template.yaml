@@ -4,4 +4,4 @@ jobs:
   example-job:
     runs-on: # system - https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
     steps:
-      - run: echo "Hello, World!"
+      - run: echo "Hello, World2!"
