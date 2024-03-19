@@ -10,3 +10,4 @@ jobs:
       - run: echo "GITHUB REF ${GITHUB_REF}"
       - run: echo "GITHUB Branch ${GITHUB_REF_NAME}"
       - run: echo "COMMIT REF ${GITHUB_SHA}"
+      - run: ls -R
